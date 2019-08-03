@@ -42,3 +42,29 @@ function mySlice(array, startIdx, endIdx) {
   }
   return copy;
 }
+
+function mySort(array, callback) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - 1; j++) {
+      if (typeof array[j] === 'string') {
+        if (callback(array[j].charCodeAt(0), array[j+1].charCodeAt(0)) > 0) {
+          let temp = array[j+1];
+          array[j+1] = array[j];
+          array[j] = temp;
+        }
+      } else if (callback(array[j], array[j+1]) > 0) {
+        let temp = array[j+1];
+        array[j+1] = array[j];
+        array[j] = temp;
+      }
+    }
+  }
+  return array;
+}
+
+function myReduce(array, callback, accumulator) {
+  for (let i = 0; i < array.length; i++) {
+    accumulator = callback(accumulator, array[i]);
+  }
+  return accumulator;
+}
