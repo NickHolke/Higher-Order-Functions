@@ -9,6 +9,11 @@ function myForEach(array, fn) {
 }
 
 // The map() method creates a new array with the results of calling a provided function on every element in the calling array.
+function myMap2(array, callback) {
+  let changedArray = [];
+  myForEach(array, x => changedArray.push(callback(x)));
+  return changedArray;
+}
 
 function myMap(array, fn) {
   let changedArray = [];
@@ -19,6 +24,16 @@ function myMap(array, fn) {
 }
 
 //The filter() method creates a new array with all elements that pass the test implemented by the provided function.
+function myFilter2(array, callback) {
+  let filtered = [];
+  myForEach(array, function(x) {
+    if (callback(x)) {
+      filtered.push(x);    
+    }
+  })
+  return filtered;
+}
+
 
 function myFilter(array, fn) {
   let filtered = [];
@@ -62,9 +77,15 @@ function mySort(array, callback) {
   return array;
 }
 
-function myReduce(array, callback, accumulator) {
-  for (let i = 0; i < array.length; i++) {
-    accumulator = callback(accumulator, array[i]);
+function myReduce(array, callback, accumulator=array[0]) {
+  if (accumulator === array[0]) {
+    for (let i = 1; i < array.length; i++) {
+      accumulator = callback(accumulator, array[i]);
+    }
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      accumulator = callback(accumulator, array[i]);
+    }
   }
   return accumulator;
 }
