@@ -89,3 +89,12 @@ function myReduce(array, callback, accumulator=array[0]) {
   }
   return accumulator;
 }
+
+function mySplice(array, start, removeNum, replaceText) {
+  for (let i = start; removeNum > 0; i++) {
+    delete array[i];
+    removeNum--;  
+  }
+  array[start] = replaceText;
+  array = array.filter(x => x != 'empty'); 
+}
